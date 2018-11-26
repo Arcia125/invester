@@ -1,18 +1,40 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginModule } from './features/login/login.module';
+import { AdvisorModule } from './features/advisor/advisor.module';
+import { ClientModule } from './features/client/client.module';
+import { AppRoutingModule } from './app-routing.module';
+import { ApiService } from './services/api.service';
+import { AuthService } from './services/auth.service';
+import { environment } from '../environments/environment';
+import { MockDataService } from './mock-data.service';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AdvisorModule,
+    ClientModule,
+    LoginModule,
+    AppRoutingModule,
+    HttpClientModule,
+    !environment.production ? HttpClientInMemoryWebApiModule.forRoot(MockDataService, { delay: 100 }) : []
   ],
-  providers: [],
+  providers: [
+    ApiService,
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

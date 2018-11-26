@@ -1,0 +1,19 @@
+<login-header></login-header>
+<mat-card>
+  <h1 mat-card-title>Login</h1>
+  <form (ngSubmit)="onSubmitForm($event)" #loginForm="ngForm">
+    <div class="fields">
+      <mat-form-field>
+        <input matInput [(ngModel)]="data.email" placeholder="Email" name="email" type="email" autocomplete="username email"
+          required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [(ngModel)]="data.password" placeholder="Password" name="password" type="password" autocomplete="current-password"
+          required>
+      </mat-form-field>
+    </div>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid && !submitting">LOGIN</button>
+    </mat-card-actions>
+  </form>
+</mat-card>
