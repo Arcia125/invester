@@ -1,6 +1,8 @@
-export enum LogLevel {
-  'error' = 0,
-  'warning' = 1,
-  'info' = 2,
-  'silly' = 3
-}
+import { LogLevel } from './log-level.enum';
+
+export const logLevels = {
+  0: 'error',
+  1: 'warning',
+  2: 'info',
+  3: 'silly'
+};

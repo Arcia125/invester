@@ -1,22 +1,48 @@
+import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
 
-import { LogLevel } from './log-levels';
-
-type LoggingFn = (currentLevel: LogLevel, level: LogLevel, format: (logLevel: LogLevel, ...args: any[]) => string, ...args: any[]) => string | void;
+import { LogLevel } from './log-level.enum';
+import { log } from './log';
+import { LoggingFnFormatter } from './logging-fn-formatter';
+import { logLevelToString } from './log-level-to-string';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LogService {
-  static log: LoggingFn = function log(currentLevel, level, format, ...args) {
-    if (currentLevel >= level) {
-      console.log(typeof format === 'function' ? format(level, ...args) : console.log);
+  public logLevel = environment.production ? LogLevel.error : LogLevel.silly;
+  public formatter: LoggingFnFormatter;
+
+
+  constructor() {
+    // sets the default formatter
+    this.formatter = this.defaultFormatter;
+  }
+
+
+  public defaultFormatter: LoggingFnFormatter = (level, ...args) => {
+    return [`${logLevelToString(level).toUpperCase()}: `, ...args];
+  }
+
+  public log(level: LogLevel, logFn: (...args: any[]) => void = window.console.log.bind(window.console), ...args: any[]) {
+    if (this.logLevel >= level) {
+      log(level, logFn, this.formatter, ...args);
     }
-  };
+  }
 
-  public logLevel = LogLevel.error;
-  constructor() { }
+  public silly = (...args: any[]) => {
+    this.log(LogLevel.silly, window.console.log.bind(window.console), ...args);
+  }
 
+  public info = (...args: any[]) => {
+    this.log(LogLevel.info, window.console.log.bind(window.console), ...args);
+  }
 
-  public defaultFormatter()
+  public warning = (...args: any[]) => {
+    this.log(LogLevel.warning, window.console.warn.bind(window.console), ...args);
+  }
+
+  public error = (...args: any[]) => {
+    this.log(LogLevel.error, window.console.warn.bind(window.console), ...args);
+  }
 }

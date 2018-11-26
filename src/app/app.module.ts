@@ -14,6 +14,8 @@ import { AuthService } from './services/auth.service';
 import { environment } from '../environments/environment';
 import { MockDataService } from './mock-data.service';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { LogService } from './services/log/log.service';
+import { PipesModule } from './pipes/pipes/pipes.module';
 
 
 @NgModule({
@@ -24,16 +26,18 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    PipesModule,
     AdvisorModule,
     ClientModule,
     LoginModule,
     AppRoutingModule,
     HttpClientModule,
-    !environment.production ? HttpClientInMemoryWebApiModule.forRoot(MockDataService, { delay: 100 }) : []
+    !environment.production ? HttpClientInMemoryWebApiModule.forRoot(MockDataService, { delay: 100 }) : [],
   ],
   providers: [
     ApiService,
-    AuthService
+    AuthService,
+    LogService
   ],
   bootstrap: [AppComponent]
 })
