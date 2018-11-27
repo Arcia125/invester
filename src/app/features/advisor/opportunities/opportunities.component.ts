@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { Opportunity } from '../../../interfaces/opportunity';
+import { OpportunityService } from '../../../services/opportunity.service';
 
 @Component({
   selector: 'app-opportunities',
@@ -6,10 +10,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./opportunities.component.css']
 })
 export class OpportunitiesComponent implements OnInit {
-
-  constructor() { }
+  public opportunities$: Observable<Opportunity>;
+  constructor(private opportunityService: OpportunityService) { }
 
   ngOnInit() {
+    this.opportunities$ = this.opportunityService.getOpportunities();
   }
 
 }

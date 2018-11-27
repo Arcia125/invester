@@ -1,3 +1,4 @@
+import { OpportunityService } from './services/opportunity.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -47,7 +48,8 @@ import { ContactSingleComponent } from './features/advisor/contact-single/contac
     AuthService,
     LogService,
     UserService,
-    ContactService
+    ContactService,
+    OpportunityService
   ],
   bootstrap: [AppComponent]
 })

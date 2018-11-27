@@ -1,27 +1,51 @@
 import { Contact } from './interfaces/contact';
 import { UserDashboard } from './interfaces/user-dashboard';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
+import { Opportunity } from './interfaces/opportunity';
+import { User } from './interfaces/user';
 
 export class MockDataService implements InMemoryDbService {
   createDb() {
-    const testUser = {
+    const testUser: User = {
       id: 'test-user',
+      dashboardId: 'test-dashboard',
+      accountId: 'test-account',
       email: 'test@test.com',
-      firstName: 'John',
-      lastName: 'Smith',
+      firstName: 'Sigmund',
+      lastName: 'Barton',
+      birthday: new Date(),
       token: '345jkl34534h534h5123==',
       role: 'advisor',
-      dashboardId: 'test-dashboard'
+      image: 'https://s3.amazonaws.com/uifaces/faces/twitter/S0ufi4n3/128.jpg',
+      address: {
+        street: '123 Main St',
+        city: 'Port Stephanfurt',
+        state: 'New Mexico',
+        postalCode: '54471'
+      }
     };
-    const users = [
+    const users: User[] = [
       testUser,
       {
+        id: 'test-client',
+        dashboardId: 'test-client-dashboard',
+        accountId: 'test-client-account',
         email: 'test2@test.com',
         firstName: 'test',
         lastName: 'test',
-        role: 'client'
+        birthday: new Date(),
+        role: 'client',
+        token: '34g9843jt6jsf8h324WEF==',
+        image: 'https://s3.amazonaws.com/uifaces/faces/twitter/joki4/128.jpg',
+        address: {
+          street: '5462 Jonas St',
+          city: 'Port Leif',
+          state: 'West Virginia',
+          postalCode: '26308'
+        }
       }
     ];
+    const opportunities: Opportunity[] = [];
     const contacts: Contact[] = [
       {
         id: '588b9214-6ec9-4519-8c30-62467ae95354',
@@ -55,10 +79,10 @@ export class MockDataService implements InMemoryDbService {
         id: 'test-dashboard',
         assets: 535265,
         donations: 25122,
-        households: 120,
-        opportunities: 5
+        households: contacts.length,
+        opportunities: opportunities.length
       }
     ];
-    return { users, dashboards, contacts };
+    return { users, dashboards, contacts, opportunities };
   }
 }

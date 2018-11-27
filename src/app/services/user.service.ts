@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
 import { AuthService } from './auth.service';
 import { UserDashboard } from '../interfaces/user-dashboard';
+import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   private _dashboard$: Observable<UserDashboard>;
-  public user;
+  public user: User;
 
   public get dashboard$() {
     if (!this._dashboard$) {
@@ -27,7 +28,7 @@ export class UserService {
     this.auth.user$.subscribe(user => (this.user = user));
   }
 
-  private getDashboardViaApi() {
+  private getDashboardViaApi(): Observable<UserDashboard> {
     return this.api.get(`dashboards/${this.user.dashboardId}`);
   }
 
