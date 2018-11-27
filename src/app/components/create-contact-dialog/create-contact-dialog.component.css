@@ -1,3 +1,9 @@
 .modal-contents {
   padding: 25px;
 }
+
+@media (max-width: 700px) {
+  app-modal-form-group {
+    flex-direction: column;
+  }
+}

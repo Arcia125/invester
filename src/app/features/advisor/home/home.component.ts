@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 
 import { BreakpointService } from '../../../services/breakpoint.service';
 import { UserService } from '../../../services/user.service';
@@ -14,7 +15,8 @@ import { ContactService } from '../../../services/contact.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
+  public isDesktop$: Subscription;
   public isDesktop: boolean;
   public numberOfColumns: number;
   public columnSpan = 1;
@@ -23,7 +25,7 @@ export class HomeComponent implements OnInit {
   public actionColumnSpan: number;
 
   constructor(public auth: AuthService, public userService: UserService, public breakpoint: BreakpointService, public dialog: MatDialog, private logger: LogService, private contactService: ContactService) {
-    breakpoint.isDesktop$.subscribe(isDesktop => {
+    this.isDesktop$ = breakpoint.isDesktop$.subscribe(isDesktop => {
       this.logger.info(`HomeComponent is in ${isDesktop ? 'desktop' : 'mobile'} mode`);
       this.isDesktop = isDesktop;
       this.numberOfColumns = isDesktop ? 4 : 2;
@@ -34,6 +36,10 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() { }
+
+  ngOnDestroy() {
+    this.isDesktop$.unsubscribe();
+  }
 
   openCreateContactDialog() {
     const data: CreateContactDialogData = {
@@ -51,6 +57,7 @@ export class HomeComponent implements OnInit {
     const options = {
       width: '500px',
       maxWidth: '90vw',
+      maxHeight: '80vh',
       data
     };
     const dialogRef = this.dialog.open(CreateContactDialogComponent, options);
