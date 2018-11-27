@@ -1,14 +1,9 @@
 <mat-toolbar color="primary">
   <a [routerLink]="'/advisor'">Invester</a>
   <nav>
-    <ul>
+    <ul *ngFor="let link of links">
       <li>
-        <a [routerLink]="'/advisor'">Dashboard</a>
-      </li>
-    </ul>
-    <ul>
-      <li>
-        <a [routerLink]="'./contacts'">Contacts</a>
+        <a [routerLink]="link.href">{{ link.text }}</a>
       </li>
     </ul>
   </nav>
