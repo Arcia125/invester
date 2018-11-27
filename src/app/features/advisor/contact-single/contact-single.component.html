@@ -43,9 +43,11 @@
           <input matInput [(ngModel)]="contact.address.state" placeholder="State" name="address.state" required>
         </mat-form-field>
       </app-modal-form-group>
-      <mat-form-field [style.width.%]="100">
-        <input matInput [(ngModel)]="contact.address.postalCode" placeholder="Zip" name="address.postalCode" required>
-      </mat-form-field>
+      <app-modal-form-group>
+        <mat-form-field [style.width.%]="100">
+          <input matInput [(ngModel)]="contact.address.postalCode" placeholder="Zip" name="address.postalCode" required>
+        </mat-form-field>
+      </app-modal-form-group>
     </div>
     <div class="actions">
       <button *ngIf="form.touched" mat-flat-button color="primary" (click)="onSubmit()">Save</button>

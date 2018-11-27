@@ -9,6 +9,16 @@
   justify-content: flex-end;
 }
 
+mat-form-field {
+  flex: 1;
+}
+
+@media (min-width: 700px) {
+  mat-form-field:not(:first-child) {
+    margin-left: 1rem;
+  }
+}
+
 .error {
   color: red;
 }

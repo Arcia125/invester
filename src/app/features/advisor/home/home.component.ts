@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.numberOfColumns = isDesktop ? 4 : 2;
       this.rowSpan = isDesktop ? 2 : 1;
       this.actionGutters = isDesktop ? '50px' : '10px';
-      this.actionColumnSpan = isDesktop ? 1 : 2;
+      this.actionColumnSpan = isDesktop ? 2 : 2;
     });
   }
 
