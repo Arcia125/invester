@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { ApiService } from './api.service';
 import { LogService } from './log/log.service';
 import { CreateContactDialogData } from '../components/create-contact-dialog/create-contact-dialog-data';
+import { Contact } from '../interfaces/contact';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,15 @@ export class ContactService {
   public getContacts() {
     this.logger.silly('ContactService#getContacts');
     return this.api.get('contacts');
+  }
+
+  public getContact(contactId: string) {
+    this.logger.silly('ContactyService#getContact ', contactId);
+    return this.api.get(`contacts/${contactId}`);
+  }
+
+  public updateContact(contactId: string, contact: Contact) {
+    this.logger.silly('ContactService#updateContact ', contactId, contact);
+    return this.api.put(`contacts/${contactId}`, contact);
   }
 }

@@ -20,12 +20,14 @@ import { SharedComponentsModule } from './components/shared-components.module';
 import { UserService } from './services/user.service';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ContactService } from './services/contact.service';
+import { ContactSingleComponent } from './features/advisor/contact-single/contact-single.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ContactSingleComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,7 @@ import { ContactService } from './services/contact.service';
     LoginModule,
     AppRoutingModule,
     HttpClientModule,
-    !environment.production ? HttpClientInMemoryWebApiModule.forRoot(MockDataService, { delay: 100 }) : [],
+    !environment.production ? HttpClientInMemoryWebApiModule.forRoot(MockDataService, { delay: 300 }) : [],
   ],
   providers: [
     ApiService,

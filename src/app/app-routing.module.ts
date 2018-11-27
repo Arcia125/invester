@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { ContactSingleComponent } from './features/advisor/contact-single/contact-single.component';
 import { AuthGuard } from './auth.guard';
 import { AdvisorGuard } from './advisor.guard';
 import { HomeComponent as AdvisorHomeComponent } from './features/advisor/home/home.component';
@@ -23,6 +24,10 @@ const routes: Routes = [
           {
             path: '',
             component: AdvisorHomeComponent
+          },
+          {
+            path: 'contacts/:id',
+            component: ContactSingleComponent
           },
           {
             path: 'contacts',

@@ -1,0 +1,26 @@
+.content {
+  padding: 60px 40px;
+}
+
+.form-content {}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.error {
+  color: red;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+@media (max-width: 700px) {
+  app-modal-form-group {
+    flex-direction: column;
+  }
+}

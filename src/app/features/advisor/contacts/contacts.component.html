@@ -14,9 +14,11 @@
   <ng-container matColumnDef="actions">
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
     <mat-cell *matCellDef="let contact" class="chevron-button-container">
-      <button mat-icon-button class="chevron-button">
-        <app-svg-chevron [direction]="'right'"></app-svg-chevron>
-      </button>
+      <a [routerLink]="'./' + contact.id">
+        <button mat-icon-button class="chevron-button">
+          <app-svg-chevron [direction]="'right'"></app-svg-chevron>
+        </button>
+      </a>
     </mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
