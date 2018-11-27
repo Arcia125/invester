@@ -6,6 +6,7 @@ import { ApiService } from './api.service';
 import { LogService } from './log/log.service';
 import { CreateContactDialogData } from '../components/create-contact-dialog/create-contact-dialog-data';
 import { Contact } from '../interfaces/contact';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,12 +20,12 @@ export class ContactService {
     return this.api.post(environment.production ? 'contacts' : `contacts/${generateFakeGuid()}`, data);
   }
 
-  public getContacts() {
+  public getContacts(): Observable<Contact[]> {
     this.logger.silly('ContactService#getContacts');
     return this.api.get('contacts');
   }
 
-  public getContact(contactId: string) {
+  public getContact(contactId: string): Observable<Contact> {
     this.logger.silly('ContactyService#getContact ', contactId);
     return this.api.get(`contacts/${contactId}`);
   }

@@ -1,0 +1,35 @@
+<ng-template #loadingSpinner>
+  <div class="loading-container">
+    <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+  </div>
+</ng-template>
+<div class="content" *ngIf="!loading; else loadingSpinner">
+  <h1>Opportunity</h1>
+  <form #form="ngForm">
+    <div *ngIf="error" class="error">{{ error }}</div>
+    <div class="form-content">
+      <app-modal-form-group>
+        <mat-form-field>
+          <input matInput [(ngModel)]="opportunity.amount" [readonly]="true" placeholder="Amount" name="amount">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [(ngModel)]="opportunity.advisor" placeholder="Advisor" name="advisor" required>
+        </mat-form-field>
+      </app-modal-form-group>
+      <app-modal-form-group>
+        <mat-form-field [style.width.%]="100">
+          <input matInput [matDatepicker]="picker" [(ngModel)]="opportunity.dateCreated" placeholder="Date Created"
+            name="dateCreated" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </app-modal-form-group>
+      <app-modal-form-group>
+        <mat-form-field [style.width.%]="100">
+          <input matInput [(ngModel)]="opportunity.lastActivity.type" [readonly]="true" placeholder="Last Activity"
+            name="lastActivity.type">
+        </mat-form-field>
+      </app-modal-form-group>
+    </div>
+  </form>
+</div>

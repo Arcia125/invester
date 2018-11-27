@@ -1,6 +1,8 @@
+import { InMemoryDbService } from 'angular-in-memory-web-api';
+
+import { Activity } from './interfaces/activity';
 import { Contact } from './interfaces/contact';
 import { UserDashboard } from './interfaces/user-dashboard';
-import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { Opportunity } from './interfaces/opportunity';
 import { User } from './interfaces/user';
 
@@ -45,7 +47,26 @@ export class MockDataService implements InMemoryDbService {
         }
       }
     ];
-    const opportunities: Opportunity[] = [];
+    const testOpportunityActivity: Activity = {
+      id: 'test-opportunity-activity',
+      sourceId: 'test-opportunity',
+      dateCreated: new Date(),
+      type: 'call'
+    };
+    const activities: Activity[] = [
+      testOpportunityActivity
+    ];
+    const testOpportunity: Opportunity = {
+      id: 'test-opportunity',
+      contactId: '588b9214-6ec9-4519-8c30-62467ae95354',
+      advisor: 'Liza Runolfsdottir',
+      dateCreated: new Date(),
+      amount: 525000,
+      lastActivity: testOpportunityActivity
+    };
+    const opportunities: Opportunity[] = [
+      testOpportunity
+    ];
     const contacts: Contact[] = [
       {
         id: '588b9214-6ec9-4519-8c30-62467ae95354',
@@ -83,6 +104,6 @@ export class MockDataService implements InMemoryDbService {
         opportunities: opportunities.length
       }
     ];
-    return { users, dashboards, contacts, opportunities };
+    return { users, dashboards, contacts, opportunities, activities };
   }
 }

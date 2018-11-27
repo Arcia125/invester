@@ -10,6 +10,7 @@ import { SharedComponentsModule } from '../../components/shared-components.modul
 import { AdvisorComponent } from './advisor.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { OpportunitiesComponent } from './opportunities/opportunities.component';
+import { OpportunitySingleComponent } from './opportunity-single/opportunity-single.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { OpportunitiesComponent } from './opportunities/opportunities.component'
     RouterModule,
     SharedComponentsModule
   ],
-  declarations: [HomeComponent, HeaderComponent, AdvisorComponent, ContactsComponent, OpportunitiesComponent]
+  declarations: [HomeComponent, HeaderComponent, AdvisorComponent, ContactsComponent, OpportunitiesComponent, OpportunitySingleComponent]
 })
 export class AdvisorModule { }

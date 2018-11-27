@@ -1,0 +1,36 @@
+.content {
+  padding: 60px 40px;
+}
+
+.form-content {}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+mat-form-field {
+  flex: 1;
+}
+
+@media (min-width: 700px) {
+  mat-form-field:not(:first-child) {
+    margin-left: 1rem;
+  }
+}
+
+.error {
+  color: red;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+@media (max-width: 700px) {
+  app-modal-form-group {
+    flex-direction: column;
+  }
+}

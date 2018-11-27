@@ -10,7 +10,8 @@ import { OpportunityService } from '../../../services/opportunity.service';
   styleUrls: ['./opportunities.component.css']
 })
 export class OpportunitiesComponent implements OnInit {
-  public opportunities$: Observable<Opportunity>;
+  public opportunities$: Observable<Opportunity[]>;
+  public displayedColumns = ['amount', 'advisor', 'dateCreated', 'lastActivity', 'actions'];
   constructor(private opportunityService: OpportunityService) { }
 
   ngOnInit() {

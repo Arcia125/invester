@@ -11,6 +11,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AdvisorComponent } from './features/advisor/advisor.component';
 import { ContactsComponent as AdvisorContactsComponent } from './features/advisor/contacts/contacts.component';
 import { OpportunitiesComponent as AdvisorOpportunitiesComponent } from './features/advisor/opportunities/opportunities.component';
+import { OpportunitySingleComponent } from './features/advisor/opportunity-single/opportunity-single.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -33,6 +34,10 @@ const routes: Routes = [
           {
             path: 'contacts',
             component: AdvisorContactsComponent
+          },
+          {
+            path: 'opportunities/:id',
+            component: OpportunitySingleComponent
           },
           {
             path: 'opportunities',
