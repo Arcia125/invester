@@ -1,2 +1,28 @@
-<advisor-header></advisor-header>
-<div>Hello {{ auth.user$ | async | userDisplayName }}</div>
+<div class="container">
+  <h2 class="greeting">Hello, {{ auth.user$ | async | userDisplayName }}</h2>
+  <mat-grid-list [cols]="numberOfColumns" rowHeight="60px" (window:resize)="onResize($event)">
+    <mat-grid-tile [colspan]="columnSpan">
+      <app-two-line-info label="Assets">{{ (userService.dashboard$ | async)?.assets | currency | placeholder }}</app-two-line-info>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="columnSpan">
+      <app-two-line-info label="Donations">{{ (userService.dashboard$ | async)?.donations | currency | placeholder }}</app-two-line-info>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="columnSpan">
+      <app-two-line-info label="Households">{{ (userService.dashboard$ | async)?.households | placeholder }}</app-two-line-info>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="columnSpan">
+      <app-two-line-info label="Opportunities">{{ (userService.dashboard$ | async)?.opportunities | placeholder }}</app-two-line-info>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-grid-list [cols]="numberOfColumns" rowHeight="30px" [gutterSize]="actionGutters">
+    <mat-grid-tile [colspan]="numberOfColumns === 2 ? 2 : 1" [rowspan]="rowSpan">
+      <button mat-raised-button color="primary" [style.width.%]="100">CREATE CONTACT</button>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="numberOfColumns === 2 ? 2 : 1" [rowspan]="rowSpan">
+      <button mat-raised-button color="primary" [style.width.%]="100">CREATE OPPORTUNITY</button>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="numberOfColumns === 2 ? 2 : 1" [rowspan]="rowSpan">
+      <button mat-raised-button color="primary" [style.width.%]="100">CREATE REPORT</button>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
