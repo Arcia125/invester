@@ -1,6 +1,6 @@
 <div class="container">
   <h2 class="greeting">Hello, {{ auth.user$ | async | userDisplayName }}</h2>
-  <mat-grid-list [cols]="numberOfColumns" rowHeight="60px" (window:resize)="onResize($event)">
+  <mat-grid-list class="dashboard-info" [cols]="numberOfColumns" rowHeight="60px">
     <mat-grid-tile [colspan]="columnSpan">
       <app-two-line-info label="Assets">{{ (userService.dashboard$ | async)?.assets | currency | placeholder }}</app-two-line-info>
     </mat-grid-tile>
@@ -15,14 +15,12 @@
     </mat-grid-tile>
   </mat-grid-list>
   <mat-grid-list [cols]="numberOfColumns" rowHeight="30px" [gutterSize]="actionGutters">
-    <mat-grid-tile [colspan]="numberOfColumns === 2 ? 2 : 1" [rowspan]="rowSpan">
-      <button mat-raised-button color="primary" [style.width.%]="100">CREATE CONTACT</button>
+    <mat-grid-tile [colspan]="actionColumnSpan" [rowspan]="rowSpan">
+      <button mat-raised-button color="primary" [style.width.%]="100" (click)="openCreateContactDialog()">CREATE
+        CONTACT</button>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="numberOfColumns === 2 ? 2 : 1" [rowspan]="rowSpan">
+    <mat-grid-tile [colspan]="actionColumnSpan" [rowspan]="rowSpan">
       <button mat-raised-button color="primary" [style.width.%]="100">CREATE OPPORTUNITY</button>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="numberOfColumns === 2 ? 2 : 1" [rowspan]="rowSpan">
-      <button mat-raised-button color="primary" [style.width.%]="100">CREATE REPORT</button>
     </mat-grid-tile>
   </mat-grid-list>
 </div>

@@ -7,6 +7,7 @@ import { HomeComponent as AdvisorHomeComponent } from './features/advisor/home/h
 import { HomeComponent as ClientHomeComponent } from './features/client/home/home.component';
 import { LoginComponent } from './features/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { AdvisorComponent } from './features/advisor/advisor.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
       {
         path: 'advisor',
         canActivate: [AdvisorGuard],
+        component: AdvisorComponent,
         children: [
           {
             path: '',

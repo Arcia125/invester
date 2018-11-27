@@ -15,7 +15,10 @@ import { environment } from '../environments/environment';
 import { MockDataService } from './mock-data.service';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LogService } from './services/log/log.service';
-import { PipesModule } from './pipes/pipes/pipes.module';
+import { PipesModule } from './pipes/pipes.module';
+import { SharedComponentsModule } from './components/shared-components.module';
+import { UserService } from './services/user.service';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -26,7 +29,9 @@ import { PipesModule } from './pipes/pipes/pipes.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    MatNativeDateModule,
     PipesModule,
+    SharedComponentsModule,
     AdvisorModule,
     ClientModule,
     LoginModule,
@@ -37,7 +42,8 @@ import { PipesModule } from './pipes/pipes/pipes.module';
   providers: [
     ApiService,
     AuthService,
-    LogService
+    LogService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

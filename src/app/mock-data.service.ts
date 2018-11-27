@@ -1,3 +1,4 @@
+import { UserDashboard } from './interfaces/user-dashboard';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 
 export class MockDataService implements InMemoryDbService {
@@ -8,7 +9,8 @@ export class MockDataService implements InMemoryDbService {
       firstName: 'John',
       lastName: 'Smith',
       token: '345jkl34534h534h5123==',
-      role: 'advisor'
+      role: 'advisor',
+      dashboardId: 'test-dashboard'
     };
     const users = [
       testUser,
@@ -19,6 +21,18 @@ export class MockDataService implements InMemoryDbService {
         role: 'client'
       }
     ];
-    return { users };
+    const contacts = [
+
+    ];
+    const dashboards: UserDashboard[] = [
+      {
+        id: 'test-dashboard',
+        assets: 535265,
+        donations: 25122,
+        households: 120,
+        opportunities: 5
+      }
+    ];
+    return { users, dashboards, contacts };
   }
 }

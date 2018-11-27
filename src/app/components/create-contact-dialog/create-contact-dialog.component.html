@@ -1,0 +1,41 @@
+<h1 mat-dialog-title>Create a Contact</h1>
+<div mat-dialog-contents class="modal-contents">
+  <form #form="ngForm">
+    <app-modal-form-group>
+      <mat-form-field>
+        <input matInput [(ngModel)]="data.firstName" placeholder="First Name" name="firstName" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [(ngModel)]="data.lastName" placeholder="Last Name" name="lastName" required>
+      </mat-form-field>
+    </app-modal-form-group>
+    <app-modal-form-group>
+      <mat-form-field [style.width.%]="100">
+        <input matInput [matDatepicker]="picker" [(ngModel)]="data.birthday" placeholder="Birthday" name="birthday"
+          required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </app-modal-form-group>
+    <app-modal-form-group>
+      <mat-form-field [style.width.%]="100">
+        <input matInput [(ngModel)]="data.address.street" placeholder="Street Address" name="address.street" required>
+      </mat-form-field>
+    </app-modal-form-group>
+    <app-modal-form-group>
+      <mat-form-field>
+        <input matInput [(ngModel)]="data.address.city" placeholder="City" name="address.city" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [(ngModel)]="data.address.state" placeholder="State" name="address.state" required>
+      </mat-form-field>
+    </app-modal-form-group>
+    <mat-form-field [style.width.%]="100">
+      <input matInput [(ngModel)]="data.address.postalCode" placeholder="Zip" name="address.postalCode" required>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">CANCEL</button>
+  <button mat-button [mat-dialog-close]="data" [disabled]="!form.valid">CREATE CONTACT</button>
+</div>
