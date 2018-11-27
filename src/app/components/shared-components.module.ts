@@ -11,13 +11,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatTableModule } from '@angular/material/table';
 
 import { TwoLineInfoComponent } from './two-line-info/two-line-info.component';
 import { CreateContactDialogComponent } from './create-contact-dialog/create-contact-dialog.component';
 import { ModalFormGroupComponent } from './modal-form-group/modal-form-group.component';
+import { SvgChevronComponent } from './svg-chevron/svg-chevron.component';
 
-const materialModules = [MatButtonModule, MatGridListModule, LayoutModule, MatDialogModule, MatToolbarModule, MatCardModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatDividerModule];
-const exportedDeclarations = [TwoLineInfoComponent, CreateContactDialogComponent, ModalFormGroupComponent];
+const materialModules = [MatButtonModule, MatGridListModule, LayoutModule, MatDialogModule, MatToolbarModule, MatCardModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatDividerModule, MatTableModule];
+const exportedDeclarations = [TwoLineInfoComponent, CreateContactDialogComponent, ModalFormGroupComponent, SvgChevronComponent];
 
 @NgModule({
   imports: [

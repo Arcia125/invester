@@ -1,13 +1,14 @@
-import { AdvisorGuard } from './advisor.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from './auth.guard';
+import { AdvisorGuard } from './advisor.guard';
 import { HomeComponent as AdvisorHomeComponent } from './features/advisor/home/home.component';
 import { HomeComponent as ClientHomeComponent } from './features/client/home/home.component';
 import { LoginComponent } from './features/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AdvisorComponent } from './features/advisor/advisor.component';
+import { ContactsComponent as AdvisorContactsComponent } from './features/advisor/contacts/contacts.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -22,6 +23,10 @@ const routes: Routes = [
           {
             path: '',
             component: AdvisorHomeComponent
+          },
+          {
+            path: 'contacts',
+            component: AdvisorContactsComponent
           }
         ]
       },

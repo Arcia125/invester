@@ -17,6 +17,9 @@
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </app-modal-form-group>
+    <mat-form-field [style.width.%]="100">
+      <input matInput [(ngModel)]="data.advisor" placeholder="Advisor" name="advisor" required>
+    </mat-form-field>
     <app-modal-form-group>
       <mat-form-field [style.width.%]="100">
         <input matInput [(ngModel)]="data.address.street" placeholder="Street Address" name="address.street" required>

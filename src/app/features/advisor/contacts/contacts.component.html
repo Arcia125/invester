@@ -1,0 +1,24 @@
+<mat-table [dataSource]="contacts$ | async">
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+    <mat-cell *matCellDef="let contact">{{contact | userDisplayName}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="birthday">
+    <mat-header-cell *matHeaderCellDef>Birthday</mat-header-cell>
+    <mat-cell *matCellDef="let contact">{{ contact.birthday | date }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="advisor">
+    <mat-header-cell *matHeaderCellDef>Advisor</mat-header-cell>
+    <mat-cell *matCellDef="let contact">{{ contact.advisor }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let contact" class="chevron-button-container">
+      <button mat-icon-button class="chevron-button">
+        <app-svg-chevron [direction]="'right'"></app-svg-chevron>
+      </button>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

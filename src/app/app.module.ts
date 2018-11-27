@@ -19,6 +19,7 @@ import { PipesModule } from './pipes/pipes.module';
 import { SharedComponentsModule } from './components/shared-components.module';
 import { UserService } from './services/user.service';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ContactService } from './services/contact.service';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     ApiService,
     AuthService,
     LogService,
-    UserService
+    UserService,
+    ContactService
   ],
   bootstrap: [AppComponent]
 })

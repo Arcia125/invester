@@ -1,6 +1,7 @@
-import { Address } from '../../interfaces/address';
+import { Address } from './address';
 
-export interface CreateContactDialogData {
+export interface Contact {
+  id?: string;
   firstName: string;
   lastName: string;
   birthday: Date;

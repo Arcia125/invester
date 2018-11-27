@@ -1,17 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { first } from 'rxjs/operators';
 
-import { ApiService } from '../../../services/api.service';
 import { BreakpointService } from '../../../services/breakpoint.service';
 import { UserService } from '../../../services/user.service';
 import { AuthService } from '../../../services/auth.service';
 import { LogService } from '../../../services/log/log.service';
 import { CreateContactDialogData } from '../../../components/create-contact-dialog/create-contact-dialog-data';
 import { CreateContactDialogComponent } from '../../../components/create-contact-dialog/create-contact-dialog.component';
-import { environment } from '../../../../environments/environment';
-import { generateFakeGuid } from '../../../helpers/generate-fake-guid';
-
+import { ContactService } from '../../../services/contact.service';
 
 @Component({
   selector: 'app-home',
@@ -26,7 +22,7 @@ export class HomeComponent implements OnInit {
   public actionGutters: string;
   public actionColumnSpan: number;
 
-  constructor(public auth: AuthService, public userService: UserService, private api: ApiService, public breakpoint: BreakpointService, public dialog: MatDialog, private logger: LogService) {
+  constructor(public auth: AuthService, public userService: UserService, public breakpoint: BreakpointService, public dialog: MatDialog, private logger: LogService, private contactService: ContactService) {
     breakpoint.isDesktop$.subscribe(isDesktop => {
       this.logger.info(`HomeComponent is in ${isDesktop ? 'desktop' : 'mobile'} mode`);
       this.isDesktop = isDesktop;
@@ -44,6 +40,7 @@ export class HomeComponent implements OnInit {
       firstName: '',
       lastName: '',
       birthday: null,
+      advisor: '',
       address: {
         street: '',
         city: '',
@@ -59,9 +56,10 @@ export class HomeComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateContactDialogComponent, options);
     dialogRef.afterClosed().subscribe(result => {
       this.logger.info('CreateContactDialogComponent closed ', result);
-      this.api.post(environment.production ? 'contacts' : `contacts/${generateFakeGuid()}`, result).pipe(
-        first()
-      ).subscribe(response => {
+      if (!result) {
+        return;
+      }
+      this.contactService.createContact(result).subscribe(response => {
         this.logger.info('Response: ', response);
       });
     });
