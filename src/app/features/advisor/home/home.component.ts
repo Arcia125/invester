@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
@@ -24,7 +25,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public actionGutters: string;
   public actionColumnSpan: number;
 
-  constructor(public auth: AuthService, public userService: UserService, public breakpoint: BreakpointService, public dialog: MatDialog, private logger: LogService, private contactService: ContactService) {
+  constructor(public auth: AuthService, public userService: UserService, public breakpoint: BreakpointService, public dialog: MatDialog, private logger: LogService, private contactService: ContactService, private router: Router) {
     this.isDesktop$ = breakpoint.isDesktop$.subscribe(isDesktop => {
       this.logger.info(`HomeComponent is in ${isDesktop ? 'desktop' : 'mobile'} mode`);
       this.isDesktop = isDesktop;
@@ -68,6 +69,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
       this.contactService.createContact(result).subscribe(response => {
         this.logger.info('Response: ', response);
+        this.router.navigate([`advisor/contacts/${response.id}`]);
       });
     });
   }

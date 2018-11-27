@@ -19,9 +19,9 @@
       <app-modal-form-group>
         <mat-form-field [style.width.%]="100">
           <input matInput [matDatepicker]="picker" [(ngModel)]="opportunity.dateCreated" placeholder="Date Created"
-            name="dateCreated" required>
+            name="dateCreated">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+          <mat-datepicker #picker [disabled]="true"></mat-datepicker>
         </mat-form-field>
       </app-modal-form-group>
       <app-modal-form-group>
@@ -30,6 +30,9 @@
             name="lastActivity.type">
         </mat-form-field>
       </app-modal-form-group>
+    </div>
+    <div class="actions">
+      <button *ngIf="form.touched" mat-flat-button color="primary" (click)="onSubmit()">Save</button>
     </div>
   </form>
 </div>

@@ -2,6 +2,6 @@ export interface UserDashboard {
   id: string;
   assets: number;
   donations: number;
-  households: number;
+  contacts: number;
   opportunities: number;
 }

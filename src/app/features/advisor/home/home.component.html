@@ -8,7 +8,7 @@
       <app-two-line-info label="Donations">{{ (userService.dashboard$ | async)?.donations | currency | placeholder }}</app-two-line-info>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="columnSpan">
-      <app-two-line-info label="Households">{{ (userService.dashboard$ | async)?.households | placeholder }}</app-two-line-info>
+      <app-two-line-info label="Contacts">{{ (userService.dashboard$ | async)?.contacts | placeholder }}</app-two-line-info>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="columnSpan">
       <app-two-line-info label="Opportunities">{{ (userService.dashboard$ | async)?.opportunities | placeholder }}</app-two-line-info>

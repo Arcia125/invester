@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 
@@ -15,6 +15,7 @@ import { NgForm } from '@angular/forms';
 })
 export class ContactSingleComponent implements OnInit {
   public contact$: Observable<Contact>;
+  public contactSubscription: Subscription;
   public contact: Contact;
   public error: string | null;
   public loading = true;
@@ -22,10 +23,14 @@ export class ContactSingleComponent implements OnInit {
   constructor(private contactService: ContactService, private route: ActivatedRoute, private logger: LogService, private router: Router) { }
 
   ngOnInit() {
+    this.initializeContactSubscription();
+  }
+
+  initializeContactSubscription() {
     this.contact$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => this.contactService.getContact(params.get('id')))
     );
-    this.contact$.subscribe(contact => {
+    this.contactSubscription = this.contact$.subscribe(contact => {
       this.loading = false;
       this.contact = contact;
     });
@@ -38,7 +43,9 @@ export class ContactSingleComponent implements OnInit {
   handleSubmitSuccess = (response) => {
     this.logger.info('Successfully updated contact ', response);
     this.error = null;
-    console.log(this.contact);
+    this.loading = true;
+    this.contactSubscription.unsubscribe();
+    this.initializeContactSubscription();
   }
 
   handleSubmitError = (errorResponse) => {

@@ -100,7 +100,7 @@ export class MockDataService implements InMemoryDbService {
         id: 'test-dashboard',
         assets: 535265,
         donations: 25122,
-        households: contacts.length,
+        contacts: contacts.length,
         opportunities: opportunities.length
       }
     ];
