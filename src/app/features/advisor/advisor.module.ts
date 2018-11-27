@@ -9,6 +9,7 @@ import { PipesModule } from '../../pipes/pipes.module';
 import { SharedComponentsModule } from '../../components/shared-components.module';
 import { AdvisorComponent } from './advisor.component';
 import { ContactsComponent } from './contacts/contacts.component';
+import { OpportunitiesComponent } from './opportunities/opportunities.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { ContactsComponent } from './contacts/contacts.component';
     RouterModule,
     SharedComponentsModule
   ],
-  declarations: [HomeComponent, HeaderComponent, AdvisorComponent, ContactsComponent]
+  declarations: [HomeComponent, HeaderComponent, AdvisorComponent, ContactsComponent, OpportunitiesComponent]
 })
 export class AdvisorModule { }
