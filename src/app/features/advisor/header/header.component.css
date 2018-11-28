@@ -18,10 +18,13 @@ nav {
   width: 100%;
 }
 
+.box-shadow-menu-container {
+  margin-left: auto;
+}
+
 .box-shadow-menu {
   position: relative;
   padding-left: 1.25em;
-  margin-left: auto;
   top: -25%;
 }
 

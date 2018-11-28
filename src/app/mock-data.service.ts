@@ -1,109 +1,157 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
+import * as faker from 'faker';
 
 import { Activity } from './interfaces/activity';
 import { Contact } from './interfaces/contact';
 import { UserDashboard } from './interfaces/user-dashboard';
 import { Opportunity } from './interfaces/opportunity';
-import { User } from './interfaces/user';
+import { User, UserRole } from './interfaces/user';
+import { Address } from './interfaces/address';
 
 export class MockDataService implements InMemoryDbService {
+
+  chooseRandom = <T>(arr: T[]): T => {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  createMockList = <T>(count: number, callback: () => T): T[] => {
+    const arr: T[] = [];
+    for (let i = count; i > 0; i--) {
+      arr.push(callback());
+    }
+    return arr;
+  }
+
+  mockAddress = (overrides: Partial<Address> = {}): Address => {
+    return {
+      street: faker.address.streetAddress(),
+      city: faker.address.city(),
+      state: faker.address.state(),
+      postalCode: faker.address.zipCode(),
+      ...overrides
+    };
+  }
+
+  mockUser = (overrides: Partial<User> = {}): User => {
+    return {
+      id: faker.random.uuid(),
+      accountId: faker.random.uuid(),
+      dashboardId: faker.random.uuid(),
+      email: faker.internet.email(),
+      birthday: faker.date.past(20),
+      firstName: faker.name.firstName(),
+      lastName: faker.name.lastName(),
+      image: faker.internet.avatar(),
+      role: this.chooseRandom<UserRole>(['advisor', 'client']),
+      token: faker.random.uuid(),
+      address: this.mockAddress(overrides.address),
+      ...overrides
+    };
+  }
+
+  mockContact = (overrides: Partial<Contact> = {}): Contact => {
+    return {
+      id: faker.random.uuid(),
+      birthday: faker.date.past(20),
+      advisor: faker.name.findName(),
+      firstName: faker.name.firstName(),
+      lastName: faker.name.lastName(),
+      address: this.mockAddress(overrides.address),
+      ...overrides
+    };
+  }
+
+  mockOpportunity = (overrides: Partial<Opportunity> = {}): Opportunity => {
+    return {
+      id: faker.random.uuid(),
+      contactId: faker.random.uuid(),
+      advisor: faker.name.findName(),
+      amount: faker.random.number({ min: -5000, max: 1000000 }),
+      dateCreated: faker.date.recent(),
+      lastActivity: this.mockActivity(overrides.lastActivity),
+      ...overrides
+    };
+  }
+
+  mockActivity = (overrides: Partial<Activity> = {}): Activity => {
+    return {
+      id: faker.random.uuid(),
+      sourceId: faker.random.uuid(),
+      type: this.chooseRandom(['call', 'notes']),
+      dateCreated: faker.date.recent(),
+      ...overrides
+    };
+  }
+
+  mockDashboard = (overrides: Partial<UserDashboard> = {}): UserDashboard => {
+    return {
+      id: faker.random.uuid(),
+      assets: faker.random.number({ min: -5000, max: 1000000 }),
+      donations: faker.random.number({ min: -5000, max: 1000000 }),
+      contacts: faker.random.number(15),
+      opportunities: faker.random.number(25),
+      ...overrides
+    };
+  }
+
   createDb() {
-    const testUser: User = {
+    const testUser: User = this.mockUser({
       id: 'test-user',
       dashboardId: 'test-dashboard',
       accountId: 'test-account',
       email: 'test@test.com',
-      firstName: 'Sigmund',
-      lastName: 'Barton',
-      birthday: new Date(),
-      token: '345jkl34534h534h5123==',
       role: 'advisor',
-      image: 'https://s3.amazonaws.com/uifaces/faces/twitter/S0ufi4n3/128.jpg',
-      address: {
-        street: '123 Main St',
-        city: 'Port Stephanfurt',
-        state: 'New Mexico',
-        postalCode: '54471'
-      }
-    };
+    });
+    // tslint:disable:no-console
+    console.time('Create Mock Database');
     const users: User[] = [
       testUser,
-      {
+      this.mockUser({
         id: 'test-client',
         dashboardId: 'test-client-dashboard',
         accountId: 'test-client-account',
-        email: 'test2@test.com',
-        firstName: 'test',
-        lastName: 'test',
-        birthday: new Date(),
         role: 'client',
-        token: '34g9843jt6jsf8h324WEF==',
-        image: 'https://s3.amazonaws.com/uifaces/faces/twitter/joki4/128.jpg',
-        address: {
-          street: '5462 Jonas St',
-          city: 'Port Leif',
-          state: 'West Virginia',
-          postalCode: '26308'
-        }
-      }
+      }),
+      ...this.createMockList<User>(faker.random.number(20), this.mockUser)
     ];
-    const testOpportunityActivity: Activity = {
+    const testOpportunityActivity: Activity = this.mockActivity({
       id: 'test-opportunity-activity',
       sourceId: 'test-opportunity',
-      dateCreated: new Date(),
       type: 'call'
-    };
+    });
     const activities: Activity[] = [
-      testOpportunityActivity
+      testOpportunityActivity,
+      ...this.createMockList<Activity>(faker.random.number(50), this.mockActivity)
     ];
-    const testOpportunity: Opportunity = {
+    const testOpportunity: Opportunity = this.mockOpportunity({
       id: 'test-opportunity',
       contactId: '588b9214-6ec9-4519-8c30-62467ae95354',
-      advisor: 'Liza Runolfsdottir',
-      dateCreated: new Date(),
-      amount: 525000,
       lastActivity: testOpportunityActivity
-    };
+    });
     const opportunities: Opportunity[] = [
-      testOpportunity
+      testOpportunity,
+      ...this.createMockList<Opportunity>(faker.random.number(15), this.mockOpportunity)
     ];
     const contacts: Contact[] = [
-      {
+      this.mockContact({
         id: '588b9214-6ec9-4519-8c30-62467ae95354',
-        firstName: 'Ida',
-        lastName: 'Schuppe',
-        birthday: new Date(),
-        advisor: 'Kayla Treutel',
-        address: {
-          street: '43107 Zola Branch',
-          city: 'West Helgastad',
-          state: 'Arkansas',
-          postalCode: '44919'
-        }
-      },
-      {
+      }),
+      this.mockContact({
         id: '38d2d7a0-fce9-4942-99e0-7819eda1bc9c',
-        firstName: 'Estel',
-        lastName: 'Mertz',
-        birthday: new Date(),
-        advisor: 'Shanel Reichel',
-        address: {
-          street: '7756 Kassulke Forge',
-          city: 'West Helgastad',
-          state: 'Arkansas',
-          postalCode: '44919'
-        }
-      }
+      }),
+      ...this.createMockList<Contact>(faker.random.number(50), this.mockContact)
     ];
     const dashboards: UserDashboard[] = [
-      {
+      this.mockDashboard({
         id: 'test-dashboard',
-        assets: 535265,
-        donations: 25122,
         contacts: contacts.length,
         opportunities: opportunities.length
-      }
+      }),
+      ...this.createMockList<UserDashboard>(faker.random.number(20), this.mockDashboard)
     ];
-    return { users, dashboards, contacts, opportunities, activities };
+    const data = { users, dashboards, contacts, opportunities, activities };
+    console.timeEnd('Create Mock Database');
+    console.log('Mock Databse created with data: ', data);
+    return data;
   }
 }
