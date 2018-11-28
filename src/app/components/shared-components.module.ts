@@ -13,13 +13,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { TwoLineInfoComponent } from './two-line-info/two-line-info.component';
 import { CreateContactDialogComponent } from './create-contact-dialog/create-contact-dialog.component';
 import { ModalFormGroupComponent } from './modal-form-group/modal-form-group.component';
 import { SvgChevronComponent } from './svg-chevron/svg-chevron.component';
 
-const materialModules = [MatButtonModule, MatGridListModule, LayoutModule, MatDialogModule, MatToolbarModule, MatCardModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatDividerModule, MatTableModule, MatProgressSpinnerModule];
+const materialModules = [MatButtonModule, MatGridListModule, LayoutModule, MatDialogModule, MatToolbarModule, MatCardModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatDividerModule, MatTableModule, MatProgressSpinnerModule, MatSidenavModule];
 const exportedDeclarations = [TwoLineInfoComponent, CreateContactDialogComponent, ModalFormGroupComponent, SvgChevronComponent];
 
 @NgModule({

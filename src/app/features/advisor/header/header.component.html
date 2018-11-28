@@ -1,9 +1,30 @@
+<ng-template #mobileNav>
+  <a class="box-shadow-menu" (click)="navIsOpen = !navIsOpen">
+  </a>
+  <mat-sidenav-container class="mobile-nav-container">
+    <mat-sidenav #sideNav mode="side" [opened]="navIsOpen">
+      <nav class="mobile-nav">
+        <ul>
+          <li *ngFor="let link of links">
+            <a [routerLink]="link.href" (click)="navIsOpen = false">{{ link.text }}</a>
+          </li>
+          <li>
+            <a (click)="onClickLogout()">Logout</a>
+          </li>
+        </ul>
+      </nav>
+    </mat-sidenav>
+  </mat-sidenav-container>
+</ng-template>
 <mat-toolbar color="primary">
   <a [routerLink]="'/advisor'">Invester</a>
-  <nav>
-    <ul *ngFor="let link of links">
-      <li>
+  <nav class="desktop-nav" *ngIf="(isDesktop$ | async); else mobileNav">
+    <ul>
+      <li *ngFor="let link of links">
         <a [routerLink]="link.href">{{ link.text }}</a>
+      </li>
+      <li>
+        <a (click)="onClickLogout()">Logout</a>
       </li>
     </ul>
   </nav>
