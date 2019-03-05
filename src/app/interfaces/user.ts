@@ -15,3 +15,16 @@ export interface User {
   birthday: Date;
   address: Address;
 }
+
+export interface Admin extends User {
+  role: 'admin';
+}
+
+export interface Advisor extends User {
+  role: 'advisor';
+}
+
+export interface Client extends User {
+  role: 'client';
+  advisorId: string;
+}

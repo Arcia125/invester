@@ -20,9 +20,9 @@ export class ContactService {
     return this.api.post(environment.production ? 'contacts' : `contacts/${generateFakeGuid()}`, data);
   }
 
-  public getContacts(): Observable<Contact[]> {
+  public getContacts(path = ''): Observable<Contact[]> {
     this.logger.silly('ContactService#getContacts');
-    return this.api.get('contacts');
+    return this.api.get(`contacts${path}`);
   }
 
   public getContact(contactId: string): Observable<Contact> {

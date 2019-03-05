@@ -130,7 +130,16 @@ export class MockDataService implements InMemoryDbService {
     });
     const opportunities: Opportunity[] = [
       testOpportunity,
-      ...this.createMockList<Opportunity>(faker.random.number(15), this.mockOpportunity)
+      this.mockOpportunity({
+        id: 'test-opportunity',
+        contactId: '588b9214-6ec9-4519-8c30-62467ae95354',
+        lastActivity: testOpportunityActivity
+      }),
+      this.mockOpportunity({
+        id: 'test-opportunity',
+        contactId: '588b9214-6ec9-4519-8c30-62467ae95354',
+        lastActivity: testOpportunityActivity
+      })
     ];
     const contacts: Contact[] = [
       this.mockContact({
